@@ -13,6 +13,7 @@ Features:
 - Under each reply: provider, model, token counts, and the store **sources** (policy/product chips) it used.
 - A **"A support person will help you"** banner when the assistant hands off to a human.
 - Example questions on an empty chat.
+- A **Handoffs** page for support staff (`/handoffs`, linked in the header with a badge for open requests). Open and Resolved tabs list customers the assistant could not fully help; **View chat** opens the conversation and **Resolve** marks it done.
 - Friendly messages for 400 / 401 / 404 / 409 / 429 / 502 / 503.
 - Light and dark mode, a responsive layout down to phone width, keyboard access and ARIA labels.
 
@@ -24,6 +25,7 @@ _Placeholder: add images to [`docs/screenshots/`](docs/screenshots/) and link th
 ![Login](docs/screenshots/login.png)
 ![Chat](docs/screenshots/chat.png)
 ![Handoff](docs/screenshots/handoff.png)
+![Handoffs page](docs/screenshots/handoffs.png)
 ![Dark mode on a phone](docs/screenshots/mobile-dark.png)
 ```
 
@@ -98,6 +100,8 @@ single origin, with `/api` routed to the backend. Then no CORS setup is needed.
 | Open a chat | `GET /api/chats/{id}` |
 | Delete | `DELETE /api/chats/{id}` (after confirming) |
 | Send | `POST /api/chats/{id}/messages` `{ message, provider? }`. `provider` is sent only when it is not "Default" |
+| Handoffs list and badge | `GET /api/handoffs?status=OPEN` or `RESOLVED` |
+| Resolve a handoff | `POST /api/handoffs/{id}/resolve` |
 
 All requests except login carry `Authorization: Bearer <token>`.
 

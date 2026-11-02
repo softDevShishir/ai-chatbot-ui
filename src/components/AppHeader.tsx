@@ -1,8 +1,11 @@
+import { NavLink } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
+import { useHandoffCount } from './HandoffContext'
 import { ThemeToggle } from './ThemeToggle'
 
 export function AppHeader() {
   const { isAuthenticated, username, logout } = useAuth()
+  const { openCount } = useHandoffCount()
   return (
     <header className="app-header">
       <div className="brand">
@@ -20,6 +23,19 @@ export function AppHeader() {
       <div className="header-actions">
         {isAuthenticated && username && <span className="header-user muted">Signed in as {username}</span>}
         <ThemeToggle />
+        {isAuthenticated && (
+          <NavLink to="/handoffs" className="btn btn-secondary btn-small header-link">
+            Handoffs
+            {openCount !== null && openCount > 0 && (
+              <>
+                <span className="count-badge" aria-hidden="true">
+                  {openCount}
+                </span>
+                <span className="sr-only">, {openCount} open</span>
+              </>
+            )}
+          </NavLink>
+        )}
         {isAuthenticated && (
           <button type="button" className="btn btn-secondary btn-small" onClick={logout}>
             Log out

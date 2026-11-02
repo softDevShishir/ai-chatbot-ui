@@ -2,6 +2,8 @@ import type {
   ApiError,
   ChatDetail,
   ChatSummary,
+  HandoffDto,
+  HandoffStatus,
   LoginResponse,
   ProviderId,
   SendMessageRequest,
@@ -130,6 +132,11 @@ export function createApiClient(options: ApiClientOptions) {
       const body: SendMessageRequest = provider ? { message, provider } : { message }
       return request<SendMessageResponse>(`${chatPath(id)}/messages`, { method: 'POST', body })
     },
+
+    listHandoffs: (status: HandoffStatus) => request<HandoffDto[]>(`/api/handoffs?status=${status}`),
+
+    resolveHandoff: (id: string) =>
+      request<HandoffDto>(`/api/handoffs/${encodeURIComponent(id)}/resolve`, { method: 'POST' }),
   }
 }
 
@@ -163,4 +170,13 @@ export function describeError(error: unknown): string {
     default:
       return status >= 500 ? 'The server had a problem. Please try again.' : (serverMessage ?? 'Something went wrong.')
   }
+}
+
+/** Like `describeError`, with wording that fits the Handoffs page. */
+export function describeHandoffError(error: unknown): string {
+  if (error instanceof ApiRequestError) {
+    if (error.status === 404) return 'This request no longer exists.'
+    if (error.status === 502 || error.status === 503) return 'The server is unavailable right now. Please try again shortly.'
+  }
+  return describeError(error)
 }

@@ -82,3 +82,17 @@ export interface ApiError {
   message: string
   path: string
 }
+
+/** domain.HandoffStatus */
+export type HandoffStatus = 'OPEN' | 'RESOLVED'
+
+/** dto.HandoffResponse. `resolvedAt` is null while the handoff is OPEN. */
+export interface HandoffDto {
+  id: string
+  conversationId: string
+  status: HandoffStatus
+  lastCustomerMessage: string
+  notified: boolean
+  createdAt: string
+  resolvedAt: string | null
+}
