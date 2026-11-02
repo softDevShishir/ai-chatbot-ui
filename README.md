@@ -4,7 +4,33 @@ A React chat UI for **Aronno Mart**, a fictional online store. It is the fronten
 [ai-chatbot-api](https://github.com/softDevShishir/ai-chatbot-api), a Spring Boot customer-support
 chatbot that answers from store products and policies using Claude, Gemini or OpenAI.
 
-Features:
+## Screenshots
+
+![Login page with username and password fields](docs/screenshots/login.png)
+
+*Login*
+
+![Chat where the AI assistant answers a return-policy question](docs/screenshots/chat-answer.png)
+
+*AI assistant answers from store policies, with source chips*
+
+![Chat in the light theme](docs/screenshots/chat-light.png)
+
+*Light theme*
+
+![Chat showing the banner "A support person will help you"](docs/screenshots/handoff.png)
+
+*When the AI can't help, the customer is handed to a person*
+
+![Telegram alert with the conversation id and the customer's last message](docs/screenshots/telegram-alert.png)
+
+*Support gets an instant Telegram alert*
+
+![Handoffs page with an open request and Resolve button](docs/screenshots/handoffs.png)
+
+*Staff see and resolve open handoffs*
+
+## Features
 
 - Log in with the backend's admin account. The JWT is kept **in memory only**.
 - A conversation list with **New chat** and **delete** (asks for confirmation first).
@@ -16,18 +42,6 @@ Features:
 - A **Handoffs** page for support staff (`/handoffs`, linked in the header with a badge for open requests). Open and Resolved tabs list customers the assistant could not fully help; **View chat** opens the conversation and **Resolve** marks it done.
 - Friendly messages for 400 / 401 / 404 / 409 / 429 / 502 / 503.
 - Light and dark mode, a responsive layout down to phone width, keyboard access and ARIA labels.
-
-## Screenshots
-
-_Placeholder: add images to [`docs/screenshots/`](docs/screenshots/) and link them here, e.g._
-
-```md
-![Login](docs/screenshots/login.png)
-![Chat](docs/screenshots/chat.png)
-![Handoff](docs/screenshots/handoff.png)
-![Handoffs page](docs/screenshots/handoffs.png)
-![Dark mode on a phone](docs/screenshots/mobile-dark.png)
-```
 
 ## Running the backend and the UI together
 
